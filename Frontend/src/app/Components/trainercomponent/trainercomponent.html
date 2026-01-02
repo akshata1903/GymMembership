@@ -1,0 +1,102 @@
+<h2>Trainers</h2>
+
+<!-- ================= TOP BAR ================= -->
+<div class="filter-box">
+  <input
+    type="text"
+    placeholder="Search by Name / Specialization / Experience / Shift"
+    [(ngModel)]="searchText"
+  />
+
+  <button (click)="applyFilter()">Filter</button>
+  <button type="button" (click)="clearFilter()">Clear</button>
+</div>
+
+@if (role === 'Admin') {
+<div class="add-btn-wrapper">
+  <button type="button" (click)="toggleAddForm()">
+    Add Trainer
+  </button>
+</div>
+}
+
+<!-- ================= MODAL OVERLAY ================= -->
+@if (showAddForm() || editingTrainer()) {
+<div class="modal-overlay" (click)="closeForm()">
+
+  <!-- ================= ADD TRAINER ================= -->
+  @if (showAddForm()) {
+  <form class="modal-form" #addForm="ngForm"
+        (ngSubmit)="addTrainer(addForm)"
+        (click)="$event.stopPropagation()">
+    <h3>Add Trainer</h3>
+
+    <input name="Name" [(ngModel)]="newTrainer.Name" placeholder="Name" required />
+    <input name="Specialization" [(ngModel)]="newTrainer.Specialization" placeholder="Specialization" required />
+    <input name="Experience" type="number" [(ngModel)]="newTrainer.Experience" placeholder="Experience (years)" required />
+    <input name="Phone" [(ngModel)]="newTrainer.Phone" placeholder="Phone" required />
+    <input name="ShiftTime" [(ngModel)]="newTrainer.ShiftTime" placeholder="Shift Time" required />
+
+    <button type="submit">Save</button>
+    <button type="button" (click)="closeForm()">Cancel</button>
+  </form>
+  }
+
+  <!-- ================= EDIT TRAINER ================= -->
+  @if (editingTrainer()) {
+  <form class="modal-form" #editForm="ngForm"
+        (ngSubmit)="updateTrainer(editForm)"
+        (click)="$event.stopPropagation()">
+    <h3>Edit Trainer</h3>
+
+    <input name="Name" [(ngModel)]="editingTrainer()!.Name" required />
+    <input name="Specialization" [(ngModel)]="editingTrainer()!.Specialization" required />
+    <input name="Experience" type="number" [(ngModel)]="editingTrainer()!.Experience" required />
+    <input name="Phone" [(ngModel)]="editingTrainer()!.Phone" required />
+    <input name="ShiftTime" [(ngModel)]="editingTrainer()!.ShiftTime" required />
+
+    <button type="submit">Update</button>
+    <button type="button" (click)="closeForm()">Cancel</button>
+  </form>
+  }
+
+</div>
+}
+
+<hr />
+
+<!-- ================= TRAINER TABLE ================= -->
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Specialization</th>
+      <th>Experience</th>
+      <th>Phone</th>
+      <th>Shift</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (trainer of trainers(); track trainer.TrainerID) {
+    <tr>
+      <td>{{ trainer.TrainerID }}</td>
+      <td>{{ trainer.Name }}</td>
+      <td>{{ trainer.Specialization }}</td>
+      <td>{{ trainer.Experience }} yrs</td>
+      <td>{{ trainer.Phone }}</td>
+      <td>{{ trainer.ShiftTime }}</td>
+
+      <td>
+        <button (click)="editTrainer(trainer)">Edit</button>
+
+        @if (role === 'Admin') {
+        <button (click)="deleteTrainer(trainer.TrainerID)">Delete</button>
+        }
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

@@ -1,0 +1,236 @@
+
+h2 {
+  color: #43368b;
+  margin-bottom: 12px;
+}
+
+.filter-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.filter-box input {
+  width: 260px;
+  height: 36px;
+  padding: 0 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.filter-box input:focus {
+  outline: none;
+  border-color: #43368b;
+  box-shadow: 0 0 4px rgba(67, 54, 139, 0.3);
+}
+
+.filter-box button {
+  height: 36px;
+  min-width: 90px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background: #43368b;
+  color: white;
+}
+
+.filter-box button:last-child {
+  background: transparent;
+  color: #43368b;
+  border: 1px solid #43368b;
+}
+
+.filter-box button:hover {
+  opacity: 0.9;
+}
+
+ 
+.add-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.add-btn-wrapper button {
+  height: 36px;
+  min-width: 180px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #43368b;
+  color: #fff;
+}
+
+.add-btn-wrapper button:hover {
+  background: #5449a7;
+}
+
+/* ================= MODAL ================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(34, 28, 96, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-form {
+  width: 420px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 24px;
+  border-top: 4px solid #43368b;
+  box-shadow: 0 4px 15px rgba(0,0,0,.1);
+  animation: fadeIn .3s ease-in-out;
+}
+
+.modal-form h3 {
+  text-align: center;
+  color: #43368b;
+  margin-bottom: 14px;
+}
+
+.modal-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.modal-form button {
+  width: 100%;
+  height: 36px;
+  margin-top: 6px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.modal-form button[type="submit"] {
+  background: #43368b;
+  color: #fff;
+  border: none;
+}
+
+.modal-form button[type="button"] {
+  background: transparent;
+  color: #43368b;
+  border: 1px solid #43368b;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  background: #fff;
+}
+
+th {
+  background: #f2f1fb;
+  color: #43368b;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 2px solid #e0def7;
+  white-space: nowrap;
+}
+
+td {
+  font-size: 13px;
+  color: #333;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+tbody tr:hover {
+  background: #fafafe;
+}
+
+
+td button {
+  height: 30px;
+  min-width: 72px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #43368b;
+  color: #fff;
+  margin-right: 6px;
+  transition: background 0.2s ease;
+}
+
+td button:last-child {
+  background: #d9534f;
+}
+
+td button:hover {
+  opacity: 0.9;
+}
+
+/* ================= STATUS BADGE ================= */
+.status {
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 14px;
+  background: #f0f0f0;
+  color: #555;
+}
+
+.status.active {
+  background: #e6f4ea;
+  color: #2e7d32;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+
+/* ================= ANIMATION ================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 700px) {
+  .filter-box {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .filter-box input {
+    width: 100%;
+  }
+
+  .add-btn-wrapper {
+    justify-content: center;
+  }
+
+  .modal-form {
+    width: 95%;
+  }
+}

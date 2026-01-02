@@ -1,0 +1,47 @@
+<nav class="navbar">
+  <div class="navbar-logo">Gym Management System</div>
+
+  <ul class="navbar-links">
+
+    @if (!isLoggedIn) {
+      <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+      <!-- <li><a routerLink="/register" routerLinkActive="active">Register</a></li> -->
+    }
+
+    @if (isLoggedIn && role === 'Admin') {
+      <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+      <li><a routerLink="/trainer" routerLinkActive="active">Trainers</a></li>
+      <li><a routerLink="/members" routerLinkActive="active">Members</a></li>
+       <li><a routerLink="/session" routerLinkActive="active">Sessions</a></li>
+      <li><a routerLink="/membershipplan" routerLinkActive="active">Membership Plans</a></li>
+      <li><a routerLink="/payment" routerLinkActive="active">Payments</a></li>
+    }
+
+  
+    @if (isLoggedIn && role === 'Trainer') {
+      <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+       <li><a routerLink="/trainer" routerLinkActive="active">Trainers</a></li>
+      <li><a routerLink="/members" routerLinkActive="active">Members</a></li>
+      <li><a routerLink="/session" routerLinkActive="active">Sessions</a></li>
+      <li><a routerLink="/membershipplan" routerLinkActive="active">Membership Plans</a></li>
+    }
+
+    @if (isLoggedIn && role === 'Member') {
+      <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+      <li><a routerLink="/members" routerLinkActive="active">Members</a></li>
+      <li><a routerLink="/session" routerLinkActive="active">Sessions</a></li>
+      <li><a routerLink="/payment" routerLinkActive="active">Payments</a></li>
+         <li><a routerLink="/trainer" routerLinkActive="active">Trainers</a></li>
+      <li><a routerLink="/membershipplan" routerLinkActive="active">Membership Plans</a></li>
+    }
+
+     @if (isLoggedIn) {
+      <li><a (click)="logout()">Logout</a></li>
+    }
+
+  </ul>
+</nav>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

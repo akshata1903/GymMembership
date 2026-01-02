@@ -1,0 +1,91 @@
+<h2>Sessions</h2>
+
+<div class="filter-box">
+    <input type="text" placeholder="Search by Trainer / Type" [(ngModel)]="searchText" />
+    <button (click)="applyFilter()">Filter</button>
+    <button (click)="clearFilter()">Clear</button>
+</div>
+
+@if (role === 'Admin' || role === 'Trainer') {
+<div class="add-btn-wrapper">
+    <button (click)="toggleAddForm()">Add Session</button>
+</div>
+}
+
+@if (showAddForm() || editingSession()) {
+<div class="modal-overlay" (click)="closeForm()">
+
+    @if (showAddForm()) {
+    <form class="modal-form" #addForm="ngForm" (ngSubmit)="addSession(addForm)" (click)="$event.stopPropagation()">
+        <h3>Add Session</h3>
+
+        <select name="TrainerId" [(ngModel)]="newSession.TrainerId" required>
+            <option value="">Select Trainer</option>
+            @for (t of trainers(); track t.TrainerID) {
+            <option [value]="t.TrainerID">{{ t.Name }}</option>
+            }
+        </select>
+
+        <select name="MemberId" [(ngModel)]="newSession.MemberId" required>
+            <option value="">Select Member</option>
+            @for (m of members(); track m.MemberID) {
+            <option [value]="m.MemberID">{{ m.Name }}</option>
+            }
+        </select>
+
+        <input name="SessionType" [(ngModel)]="newSession.SessionType" placeholder="Session Type" required />
+
+        <button type="submit">Save</button>
+        <button type="button" (click)="closeForm()">Cancel</button>
+    </form>
+    }
+
+    @if (editingSession()) {
+    <form class="modal-form" #editForm="ngForm" (ngSubmit)="updateSession(editForm)" (click)="$event.stopPropagation()">
+        <h3>Edit Session</h3>
+
+        <input name="SessionType" [(ngModel)]="editingSession()!.SessionType" required />
+
+        <button type="submit">Update</button>
+        <button type="button" (click)="closeForm()">Cancel</button>
+    </form>
+    }
+</div>
+}
+
+<hr />
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Trainer</th>
+            <th>Date</th>
+            <th>Session Type</th>
+            @if (role !== 'Member') {
+            <th>Actions</th>
+            }
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (s of sessions(); track s.SessionId) {
+        <tr>
+            <td>{{ s.SessionId }}</td>
+            <td>{{ getTrainerName(s.TrainerId) }}</td>
+            <td>{{ s.SessionDate | date:'dd-MMM-yyyy' }}</td>
+
+            <td>{{ s.SessionType }}</td>
+
+            <td>
+                @if (role !== 'Member') {
+                <button (click)="editSession(s)">Edit</button>
+                <button (click)="deleteSession(s.SessionId)">Delete</button>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+
+</table>

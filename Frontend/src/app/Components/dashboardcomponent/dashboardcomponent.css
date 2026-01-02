@@ -1,0 +1,67 @@
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+
+.card p {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007BFF; 
+  margin: 0;
+}
+
+.card.members {
+  border-top: 4px solid #28a745; 
+}
+
+.card.payments {
+  border-top: 4px solid #ffc107;
+}
+
+.card.sessions {
+  border-top: 4px solid #17a2b8; 
+}
+
+.card.trainers {
+  border-top: 4px solid #6f42c1; 
+}
+
+.card.plans {
+  border-top: 4px solid #fd7e14; 
+}
+
+@media (max-width: 600px) {
+  .card h3 {
+    font-size: 1rem;
+  }
+
+  .card p {
+    font-size: 1.5rem;
+  }
+}

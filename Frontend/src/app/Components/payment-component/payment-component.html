@@ -1,0 +1,109 @@
+<div class="payment-container">
+
+  <h2>Payments</h2>
+
+  <!-- FILTER -->
+  <div class="filter-box">
+    <input type="text" placeholder="Search by Member / Status" [(ngModel)]="searchText" />
+    <button (click)="applyFilter()">Filter</button>
+    <button (click)="clearFilter()">Clear</button>
+  </div>
+
+  <!-- ADD PAYMENT BUTTON -->
+<div *ngIf="role === 'Admin' || role === 'Member'" class="add-btn-wrapper">
+  <button (click)="toggleAddForm()">
+    {{ showAddForm() ? 'Cancel' : 'Add Payment' }}
+  </button>
+</div>
+
+  <!-- MODAL -->
+  <div *ngIf="showAddForm() || editingPayment()" class="modal-overlay" (click)="closeForm()">
+
+    <!-- ADD FORM -->
+    <form *ngIf="showAddForm()" class="payment-form" #paymentForm="ngForm"
+          (ngSubmit)="addPayment(paymentForm)"
+          (click)="$event.stopPropagation()">
+
+      <h3>Add Payment</h3>
+
+      <label>Member</label>
+      <select [(ngModel)]="newPayment.MemberId" name="MemberId" required>
+        <option value="">Select Member</option>
+        <option *ngFor="let m of members()" [value]="m.MemberID">
+          {{ m.Name }}
+        </option>
+      </select>
+
+      <label>Membership Plan</label>
+      <select [(ngModel)]="newPayment.MembershipPlanId" name="MembershipPlanId" required>
+        <option value="">Select Plan</option>
+        <option *ngFor="let p of membershipPlans()" [value]="p.MembershipPlanId">
+          {{ p.PlanName }}
+        </option>
+      </select>
+
+      <label>Amount</label>
+      <input type="number" [(ngModel)]="newPayment.Amount" name="Amount" required />
+
+      <label>Payment Date</label>
+      <input type="date" [(ngModel)]="newPayment.PaymentDate" name="PaymentDate" required />
+
+      <label>Payment Method</label>
+      <input type="text" [(ngModel)]="newPayment.PaymentMethod" name="PaymentMethod" required />
+
+      <button type="submit">Save</button>
+      <button type="button" (click)="closeForm()">Cancel</button>
+    </form>
+
+  </div>
+
+  <hr />
+
+  <!-- PAYMENTS TABLE -->
+  <table class="payment-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Member</th>
+        <th>Plan</th>
+        <th>Amount</th>
+        <th>Payment Date</th>
+        <th>Method</th>
+        <th>Status</th>
+        <th>Remaining</th>
+        <th *ngIf="role === 'Admin'">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of payments()">
+        <td>{{ p.paymentID }}</td>
+        <td>{{ getMemberName(p.MemberId) }}</td>
+        <td>{{ getPlanName(p.MembershipPlanId) }}</td>
+
+        <td>{{ p.Amount | currency:'INR' }}</td>
+        <td>{{ p.PaymentDate | date:'shortDate' }}</td>
+        <td>{{ p.PaymentMethod }}</td>
+
+        <!-- STATUS -->
+        <td>
+          <span class="status"
+                [ngClass]="p.PaymentStatus === 'Paid' ? 'paid' : 'pending'">
+            {{ p.PaymentStatus }}
+          </span>
+        </td>
+
+        <!-- REMAINING -->
+        <td>
+          {{ p.RemainingAmount | currency:'INR' }}
+        </td>
+
+        <!-- ACTIONS -->
+        <td *ngIf="role === 'Admin'">
+          <button (click)="deletePayment(p.paymentID)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

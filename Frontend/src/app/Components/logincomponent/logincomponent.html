@@ -1,0 +1,54 @@
+<div class="login-container">
+
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+    <h2 class="title">Login</h2>
+
+    <label>Username</label>
+    <input type="text" formControlName="userName" />
+
+    @if (loginForm.get('userName')?.touched && loginForm.get('userName')?.invalid) {
+      <p class="error">Username is required</p>
+    }
+
+    <label>Role</label>
+    <select formControlName="role">
+      <option value="">Select role</option>
+      <option value="Admin">Admin</option>
+      <option value="Trainer">Trainer</option>
+      <option value="Member">Member</option>
+    </select>
+
+    @if (loginForm.get('role')?.touched && loginForm.get('role')?.invalid) {
+      <p class="error">Role is required</p>
+    }
+
+    <label>Email</label>
+    <input type="email" formControlName="email" />
+
+    @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+      <p class="error">Email is required</p>
+    }
+
+    <label>Password</label>
+    <input type="password" formControlName="passwordHash" />
+
+    @if (loginForm.get('passwordHash')?.touched && loginForm.get('passwordHash')?.invalid) {
+      <p class="error">Password is required</p>
+    }
+
+    <button type="submit" [disabled]="loginForm.invalid">
+      Login
+    </button>
+
+    <!-- Register section -->
+    <div class="register-section">
+      <p>Don't have an account?</p>
+      <button type="button" class="register-btn" (click)="goToRegister()">
+        Register
+      </button>
+    </div>
+
+  </form>
+
+</div>

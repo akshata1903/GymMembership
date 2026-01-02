@@ -1,0 +1,95 @@
+<h2>Membership Plans</h2>
+
+<div class="filter-box">
+  <input
+    type="text"
+    placeholder="Search by Name / Duration / Price"
+    [(ngModel)]="searchText"
+  />
+
+  <button (click)="applyFilter()">Filter</button>
+  <button type="button" (click)="clearFilter()">Clear</button>
+</div>
+
+
+@if (role === 'Admin') {
+<div class="add-btn-wrapper">
+  <button type="button" (click)="toggleAddForm()">
+    Add Membership Plan
+  </button>
+</div>
+
+}
+
+@if (showAddForm() || editingPlan()) {
+<div class="modal-overlay" (click)="closeForm()">
+
+
+    @if (showAddForm()) {
+    <form class="modal-form" #addForm="ngForm" (ngSubmit)="addPlan(addForm)" (click)="$event.stopPropagation()">
+        <h3>Add Membership Plan</h3>
+
+        <input name="PlanName" [(ngModel)]="newPlan.PlanName" placeholder="Plan Name" required />
+
+        <input type="number" name="DurationInMonths" [(ngModel)]="newPlan.DurationInMonths"
+            placeholder="Duration (Months)" required />
+
+        <input type="number" name="Price" [(ngModel)]="newPlan.Price" placeholder="Price" required />
+
+        <button type="submit">Save</button>
+        <button type="button" (click)="closeForm()">Cancel</button>
+    </form>
+    }
+
+    @if (editingPlan()) {
+    <form class="modal-form" #editForm="ngForm" (ngSubmit)="updatePlan(editForm)" (click)="$event.stopPropagation()">
+        <h3>Edit Membership Plan</h3>
+
+        <input name="PlanName" [(ngModel)]="editingPlan()!.PlanName" required />
+
+        <input type="number" name="DurationInMonths" [(ngModel)]="editingPlan()!.DurationInMonths" required />
+
+        <input type="number" name="Price" [(ngModel)]="editingPlan()!.Price" required />
+
+        <button type="submit">Update</button>
+        <button type="button" (click)="closeForm()">Cancel</button>
+    </form>
+    }
+
+</div>
+}
+
+<hr />
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Plan Name</th>
+            <th>Duration (Months)</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (plan of plans(); track plan.MembershipPlanId) {
+        <tr>
+            <td>{{ plan.MembershipPlanId }}</td>
+            <td>{{ plan.PlanName }}</td>
+            <td>{{ plan.DurationInMonths }}</td>
+            <td>{{ plan.Price }}</td>
+
+            <td>
+                <button (click)="editPlan(plan)">Edit</button>
+
+                @if (role === 'Admin') {
+                <button (click)="deletePlan(plan.MembershipPlanId)">
+                    Delete
+                </button>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

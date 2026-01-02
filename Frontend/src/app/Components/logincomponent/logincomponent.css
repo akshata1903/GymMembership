@@ -1,0 +1,139 @@
+/* ================= LOGIN CONTAINER ================= */
+.login-container {
+  width: 420px;
+  margin: 80px auto;
+
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 26px 28px;
+
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease;
+
+  box-sizing: border-box;
+}
+
+/* ================= FORM ================= */
+.login-container form {
+  display: grid;
+  grid-template-columns: 1fr; /* ✅ single column */
+  row-gap: 12px;
+}
+
+/* ================= TITLE ================= */
+.login-container .title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #43368b;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #e2e0f5;
+  padding-bottom: 8px;
+}
+
+/* ================= LABELS ================= */
+.login-container label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+
+/* ================= INPUTS & SELECT ================= */
+.login-container input,
+.login-container select {
+  width: 100%;
+  padding: 9px 10px;
+  font-size: 13px;
+
+  border-radius: 7px;
+  border: 1px solid #cfcfe6;
+  background: #fafaff;
+
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.login-container input:focus,
+.login-container select:focus {
+  background: #ffffff;
+  border-color: #43368b;
+  box-shadow: 0 0 0 2px rgba(67, 54, 139, 0.15);
+  outline: none;
+}
+
+/* ================= ERROR MESSAGE ================= */
+.login-container .error {
+  font-size: 12px;
+  color: #d9534f;
+  margin-top: -6px;
+}
+
+/* ================= LOGIN BUTTON ================= */
+.login-container button[type="submit"] {
+  margin-top: 6px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+
+  background: #43368b;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.login-container button[type="submit"]:hover:not(:disabled) {
+  background: #5449a7;
+}
+
+.login-container button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+/* ================= REGISTER SECTION ================= */
+.register-section {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.register-section p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.register-btn {
+  background: transparent;
+  border: 1px solid #43368b;
+  color: #43368b;
+  padding: 6px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.register-btn:hover {
+  background: #43368b;
+  color: #ffffff;
+}
+
+/* ================= ANIMATION ================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 500px) {
+  .login-container {
+    width: 92%;
+    padding: 22px;
+  }
+}

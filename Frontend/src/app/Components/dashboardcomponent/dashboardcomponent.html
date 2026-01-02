@@ -1,0 +1,28 @@
+<div class="dashboard-cards">
+
+  <div *ngIf="role==='Admin' || role==='Trainer' || role==='Member'" class="card members" (click)="navigateTo('members')">
+    <h3>Members</h3>
+    <p>{{ memberCount() }}</p>
+  </div>
+
+  <div *ngIf="role==='Admin' || role==='Trainer' || role==='Member'" class="card payments" (click)="navigateTo('payment')">
+    <h3>Payments</h3>
+    <p>{{ paymentCount() }}</p>
+  </div>
+
+  <div *ngIf="role==='Admin' || role==='Trainer' || role==='Member'" class="card sessions" (click)="navigateTo('session')">
+    <h3>Sessions</h3>
+    <p>{{ sessionCount() }}</p>
+  </div>
+
+  <div *ngIf="role==='Admin' " class="card trainers" (click)="navigateTo('trainer')">
+    <h3>Trainers</h3>
+    <p>{{ trainerCount() }}</p>
+  </div>
+
+  <div *ngIf="role==='Admin'|| role==='Member'" class="card plans" (click)="navigateTo('membershipplan')">
+    <h3>Membership Plans</h3>
+    <p>{{ planCount() }}</p>
+  </div>
+
+</div>

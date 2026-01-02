@@ -1,0 +1,170 @@
+<div class="modal-overlay">
+  <form class="register-container" [formGroup]="registerForm" (ngSubmit)="register()">
+    <h2 class="title">Register User</h2>
+
+    <!-- ================= USER INFO ================= -->
+    <div class="form-field">
+      <label>Username</label>
+      <input type="text" formControlName="UserName" placeholder="Username" />
+    </div>
+
+    <div class="form-field">
+      <label>Email</label>
+      <input type="email" formControlName="Email" placeholder="Email" />
+    </div>
+
+    <div class="form-field">
+      <label>Password</label>
+      <input type="password" formControlName="PasswordHash" placeholder="Password" />
+    </div>
+
+    <div class="form-field">
+      <label>Role</label>
+      <select formControlName="Role" (change)="onRoleChange()">
+        <option value="">Select Role</option>
+        <option value="Member">Member</option>
+        <option value="Trainer">Trainer</option>
+      </select>
+    </div>
+
+    <!-- ================= TRAINER DETAILS ================= -->
+    @if (showTrainerFields) {
+    <div class="details-box" formGroupName="TrainerDetails">
+      <h3>Trainer Details</h3>
+
+      <div class="form-field">
+        <label>Trainer Name</label>
+        <input formControlName="Name" />
+      </div>
+
+      <div class="form-field">
+        <label>Specialization</label>
+        <input formControlName="Specialization" />
+      </div>
+
+      <div class="form-field">
+        <label>Experience (Years)</label>
+        <input type="number" formControlName="Experience" />
+      </div>
+
+      <div class="form-field">
+        <label>Phone Number</label>
+        <input formControlName="Phone" />
+      </div>
+
+      <div class="form-field">
+        <label>Shift Time</label>
+        <input formControlName="ShiftTime" />
+      </div>
+    </div>
+    }
+
+    <!-- ================= MEMBER DETAILS ================= -->
+    @if (showMemberFields) {
+    <div class="details-box" formGroupName="MemberDetails">
+      <h3>Member Details</h3>
+
+      <div class="form-field">
+        <label>Full Name</label>
+        <input formControlName="Name" />
+      </div>
+
+      <div class="form-field">
+        <label>Gender</label>
+        <select formControlName="Gender">
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label>Age</label>
+        <input type="number" formControlName="Age" />
+      </div>
+
+      <div class="form-field">
+        <label>Date of Birth</label>
+        <input type="date" formControlName="DateOfBirth" />
+      </div>
+
+      <div class="form-field">
+        <label>Contact Number</label>
+        <input formControlName="ContactNumber" />
+      </div>
+
+      <div class="form-field">
+        <label>Email</label>
+        <input formControlName="Email" />
+      </div>
+
+      <div class="form-field full-width">
+        <label>Address</label>
+        <input formControlName="Address" />
+      </div>
+
+      <div class="form-field">
+        <label>Height</label>
+        <input type="number" formControlName="Height" />
+      </div>
+
+      <div class="form-field">
+        <label>Weight</label>
+        <input type="number" formControlName="Weight" />
+      </div>
+
+      <div class="form-field">
+        <label>BMI</label>
+        <input type="number" formControlName="BMI" readonly />
+      </div>
+
+      <div class="form-field full-width">
+        <label>Medical Conditions</label>
+        <input formControlName="MedicalConditions" />
+      </div>
+
+      <div class="form-field full-width">
+        <label>Fitness Goals</label>
+        <input formControlName="FitnessGoals" />
+      </div>
+
+      <div class="form-field">
+        <label>Join Date</label>
+        <input type="date" formControlName="JoinDate" />
+      </div>
+
+      <div class="form-field">
+        <label>Membership End Date</label>
+        <input type="date" formControlName="MembershipEndDate" />
+      </div>
+
+      <div class="form-field">
+        <label>Membership Plan</label>
+        <select formControlName="MembershipPlanId">
+          <option [ngValue]="null">Select Membership Plan</option>
+          @for (plan of plans; track $index) {
+          <option [ngValue]="plan.MembershipPlanId">
+            {{ plan.PlanName }} ({{ plan.Price }})
+          </option>
+          }
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label>Trainer</label>
+        <select formControlName="TrainerId">
+          <option [ngValue]="null">Select Trainer</option>
+          @for (trainer of trainers; track $index) {
+          <option [ngValue]="trainer.TrainerID">
+            {{ trainer.Name }} ({{ trainer.Specialization }})
+          </option>
+          }
+        </select>
+      </div>
+    </div>
+    }
+
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+    <button type="button" class="link-btn" (click)="goToLogin()">Back to Login</button>
+  </form>
+</div>
